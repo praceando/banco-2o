@@ -128,7 +128,7 @@ CREATE TABLE interesse (
 CREATE TABLE frase_sustentavel (
     id_frase SERIAL PRIMARY KEY,
 	ds_frase TEXT,
-	dt_frase TIMESTAMP
+	dt_frase TIMESTAMP,
 	dt_atualizacao TIMESTAMP DEFAULT CURRENT_DATE
 );
 
