@@ -1,0 +1,11 @@
+- Trigger para quantInteresse
+- Trigger de sativação
+- +6 Triggers para logs
+
+- Procedure para inserir evento + tag
+- Procedure para inser compra e atualizar status
+
+- Function de inserir id_avatar
+- Function de idade 
+
+
