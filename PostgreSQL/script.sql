@@ -87,8 +87,10 @@ CREATE TABLE evento (
     qt_interesse INT,
     nm_evento VARCHAR(255),
     ds_evento TEXT,
-    dt_inicio TIMESTAMP,
-    dt_fim TIMESTAMP,
+    dt_inicio DATE,
+    hr_inicio TIME,
+    dt_fim TIME,
+    hr_fim TIME,
     url_documentacao TEXT,
     dt_atualizacao TIMESTAMP DEFAULT CURRENT_DATE,
 
@@ -167,6 +169,7 @@ CREATE TABLE pagamento (
 	cd_compra INT,
 	dt_pagamento TIMESTAMP,
 	dt_atualizacao TIMESTAMP,
+    #tipo de pagamento 
 	
 	FOREIGN KEY (cd_compra) REFERENCES compra(id_compra)
 );
