@@ -1,4 +1,9 @@
---procedure de inserir evento e suas tags
+/*
+================================================
+         PROCEDURE DE EVENTO + TAG           
+================================================
+*/
+
 CREATE OR REPLACE PROCEDURE PRC_INSERIR_EVENTO_TAGS(
     p_nm_evento VARCHAR,
     p_ds_evento TEXT,
@@ -27,3 +32,29 @@ BEGIN
 
 END;
 $$;
+
+
+/*
+================================================
+        PROCEDURE DE PAGAMENTO + COMPRA           
+================================================
+*/
+
+CREATE OR REPLACE PROCEDURE PRC_ATUALIZAR_STATUS_COMPRA(
+    p_cd_compra INT 
+)
+LANGUAGE 'plpgsql' AS $$	
+DECLARE
+    v_dt_pagamento TIMESTAMP
+BEGIN
+
+    SELECT NOW() INTO v_dt_pagamento
+
+    INSERT INTO pagamento(cd_compra, dt_pagamento)
+    VALUES(p_cd_compra, v_dt_pagamento);
+
+    UPDATE compra SET ds_status='Concluída'
+    WHERE id_compra=p_cd_compra;
+    
+COMMIT;
+END; $$

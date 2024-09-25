@@ -16,6 +16,7 @@ BEGIN
 		WHERE evento.cd_anunciante=OLD.id_usuario;
 	END IF;
 	
+	RETURN OLD;
 END;
 $$ LANGUAGE 'plpgsql';
 
@@ -66,20 +67,22 @@ CREATE TABLE log_usuario(
 
 CREATE OR REPLACE FUNCTION fnc_log_usuario() RETURNS TRIGGER AS $$
 DECLARE
-	us_operacao VARCHAR(80);
-	cd_tabela INT;
+	v_us_operacao VARCHAR(80);
+	v_cd_tabela INT;
 BEGIN 
 
-	SELECT USENAME FROM PG_USER INTO usuario;
+	SELECT USENAME FROM PG_USER INTO v_us_operacao ;
 
 	IF (SELECT TG_OP IS NOT 'DELETE') THEN
-		SELECT OLD.id_usuario into cd_tabela;
+		SELECT OLD.id_usuario into v_cd_tabela;
 	ELSE
-		SELECT NEW.id_usuario into cd_tabela;
+		SELECT NEW.id_usuario into v_cd_tabela;
 	END IF;
 	
 	INSERT INTO log_usuario(cd_tabela,us_operacao,nm_operacao,dt_operacao)
-	VALUES(cd_usuario,us_operacao,TG_OP,CURRENT_DATE);
+	VALUES(v_cd_tabela,v_us_operacao,TG_OP,CURRENT_DATE);
+	
+	RETURN OLD;
 END;
 $$ LANGUAGE 'pgplsql';
 
@@ -106,20 +109,22 @@ CREATE TABLE log_produto(
 
 CREATE OR REPLACE FUNCTION fnc_log_produto() RETURNS TRIGGER AS $$
 DECLARE
-	us_operacao VARCHAR(80);
-	cd_tabela INT;
+	v_us_operacao VARCHAR(80);
+	v_cd_tabela INT;
 BEGIN 
 
-	SELECT USENAME FROM PG_USER INTO us_operacao;
+	SELECT USENAME FROM PG_USER INTO v_us_operacao;
 
 	IF (SELECT TG_OP IS NOT 'DELETE') THEN
-		SELECT OLD.id_produto into cd_tabela;
+		SELECT OLD.id_produto into v_cd_tabela;
 	ELSE
-		SELECT NEW.id_produto into cd_tabela;
+		SELECT NEW.id_produto into v_cd_tabela;
 	END IF;
 	
 	INSERT INTO log_produto(cd_tabela,us_operacao,nm_operacao,dt_operacao)
-	VALUES(cd_usuario,us_operacao,TG_OP,CURRENT_DATE);
+	VALUES(v_cd_tabela,v_us_operacao,TG_OP,CURRENT_DATE);
+
+	RETURN OLD;
 END;
 $$ LANGUAGE 'pgplsql';
 
@@ -146,20 +151,22 @@ CREATE TABLE log_compra(
 
 CREATE OR REPLACE FUNCTION fnc_log_compra() RETURNS TRIGGER AS $$
 DECLARE
-	us_operacao VARCHAR(80);
-	cd_tabela INT;
+	v_us_operacao VARCHAR(80);
+	v_cd_tabela INT;
 BEGIN 
 
-	SELECT USENAME FROM PG_USER INTO us_operacao;
+	SELECT USENAME FROM PG_USER INTO v_us_operacao;
 
 	IF (SELECT TG_OP IS NOT 'DELETE') THEN
-		SELECT OLD.id_compra into cd_tabela;
+		SELECT OLD.id_compra into v_cd_tabela;
 	ELSE
-		SELECT NEW.id_comprainto cd_tabela;
+		SELECT NEW.id_comprainto v_cd_tabela;
 	END IF;
 	
 	INSERT INTO log_compra(cd_tabela,us_operacao,nm_operacao,dt_operacao)
-	VALUES(cd_usuario,us_operacao,TG_OP,CURRENT_DATE);
+	VALUES(v_cd_tabela,v_us_operacao,TG_OP,CURRENT_DATE);
+
+	RETURN OLD;
 END;
 $$ LANGUAGE 'pgplsql';
 
@@ -186,20 +193,22 @@ CREATE TABLE log_pagamento(
 
 CREATE OR REPLACE FUNCTION fnc_log_pagamento() RETURNS TRIGGER AS $$
 DECLARE
-	us_operacao VARCHAR(80);
-	cd_tabela INT;
+	v_us_operacao VARCHAR(80);
+	v_cd_tabela INT;
 BEGIN 
 
-	SELECT USENAME FROM PG_USER INTO us_operacao;
+	SELECT USENAME FROM PG_USER INTO v_us_operacao;
 
 	IF (SELECT TG_OP IS NOT 'DELETE') THEN
-		SELECT OLD.id_pagamento into cd_tabela;
+		SELECT OLD.id_pagamento into v_cd_tabela;
 	ELSE
-		SELECT NEW.id_pagamento into cd_tabela;
+		SELECT NEW.id_pagamento into v_cd_tabela;
 	END IF;
 	
 	INSERT INTO log_pagamento(cd_tabela,us_operacao,nm_operacao,dt_operacao)
-	VALUES(cd_usuario,us_operacao,TG_OP,CURRENT_DATE);
+	VALUES(v_cd_tabela,v_us_operacao,TG_OP,CURRENT_DATE);
+
+	RETURN OLD;
 END;
 $$ LANGUAGE 'pgplsql';
 
@@ -226,20 +235,22 @@ CREATE TABLE log_evento (
 
 CREATE OR REPLACE FUNCTION fnc_log_evento() RETURNS TRIGGER AS $$
 DECLARE
-	us_operacao VARCHAR(80);
-	cd_tabela INT;
+	v_us_operacao VARCHAR(80);
+	v_cd_tabela INT;
 BEGIN 
 
-	SELECT USENAME FROM PG_USER INTO us_operacao;
+	SELECT USENAME FROM PG_USER INTO v_us_operacao;
 
 	IF (SELECT TG_OP IS NOT 'DELETE') THEN
-		SELECT OLD.id_pagamento into cd_tabela;
+		SELECT OLD.id_pagamento into v_cd_tabela;
 	ELSE
-		SELECT NEW.id_pagamento into cd_tabela;
+		SELECT NEW.id_pagamento into v_cd_tabela;
 	END IF;
 	
 	INSERT INTO log_pagamento(cd_tabela,us_operacao,nm_operacao,dt_operacao)
-	VALUES(cd_usuario,us_operacao,TG_OP,CURRENT_DATE);
+	VALUES(v_cd_tabela,v_us_operacao,TG_OP,CURRENT_DATE);
+	
+	RETURN OLD;
 END;
 $$ LANGUAGE 'pgplsql';
 
@@ -265,20 +276,22 @@ CREATE TABLE log_tag (
 
 CREATE OR REPLACE FUNCTION fnc_log_tag() RETURNS TRIGGER AS $$
 DECLARE
-	us_operacao VARCHAR(80);
-	cd_tabela INT;
+	v_us_operacao VARCHAR(80);
+	v_cd_tabela INT;
 BEGIN 
 
-	SELECT USENAME FROM PG_USER INTO us_operacao;
+	SELECT USENAME FROM PG_USER INTO v_us_operacao;
 
 	IF (SELECT TG_OP IS NOT 'DELETE') THEN
-		SELECT OLD.id_pagamento into cd_tabela;
+		SELECT OLD.id_pagamento into v_cd_tabela;
 	ELSE
-		SELECT NEW.id_pagamento into cd_tabela;
+		SELECT NEW.id_pagamento into v_cd_tabela;
 	END IF;
 
 	INSERT INTO log_pagamento(cd_tabela,us_operacao,nm_operacao,dt_operacao)
-	VALUES(cd_usuario,us_operacao,TG_OP,CURRENT_DATE);
+	VALUES(v_cd_tabela,v_us_operacao,TG_OP,CURRENT_DATE);
+
+	RETURN OLD;
 END;
 $$ LANGUAGE 'pgplsql';
 

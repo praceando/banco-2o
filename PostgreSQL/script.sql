@@ -155,7 +155,7 @@ CREATE TABLE compra (
 	cd_evento INT,
     dt_compra TIMESTAMP DEFAULT CURRENT_DATE,
     vl_total DECIMAL(10, 2),
-    ds_status VARCHAR(255),
+    ds_status VARCHAR(255) DEFAULT 'Pendente',
     dt_atualizacao TIMESTAMP DEFAULT CURRENT_DATE,
 
     FOREIGN KEY (cd_usuario) REFERENCES usuario(id_usuario),
@@ -168,8 +168,7 @@ CREATE TABLE pagamento (
 	id_pagamento SERIAL PRIMARY KEY,
 	cd_compra INT,
 	dt_pagamento TIMESTAMP,
-	dt_atualizacao TIMESTAMP,
-    #tipo de pagamento 
+	dt_atualizacao TIMESTAMP DEFAULT CURRENT_DATE,
 	
 	FOREIGN KEY (cd_compra) REFERENCES compra(id_compra)
 );
