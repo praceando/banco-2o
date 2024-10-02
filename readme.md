@@ -17,19 +17,7 @@ O banco de dados do Praceando utiliza as seguintes tecnologias:
 - **Firebase**: Utilizado para autenticação, sincronização em tempo real e notificações push, oferecendo uma solução integrada e escalável para funcionalidades de front-end.
 - **Redis**: Utilizado como um banco de dados em memória para caching, proporcionando acesso ultrarrápido a dados frequentemente acessados.
 
-## Endpoints
-
-Os serviços de banco de dados do Praceando são acessados através dos seguintes endpoints:
-
-- **PostgreSQL**:  `postgresql://<user>:<password>@localhost:5432/praceando_db`
-- **MongoDB**: `mongodb://<user>:<password>@localhost:27017/praceando_db`
-- **Redis**: `redis://<user>:<password>@localhost:6379`
-- **Firebase**: `https://<your-database-name>.firebaseio.com/`
-
-Certifique-se de que os endpoints estão configurados corretamente nas configurações do aplicativo para que ele possa se conectar e operar com os bancos de dados.
-
 ---
-Enviando nossos melhores insights, com 95% de confiança e 100% de amor. 🎲❤️ - equipe de dados!
+Enviando nossos melhores insights com 95% de confiança - equipe de dados🎲!
 - [Fernanda Leão](https://github.com/fernandaleaoleita)
 - [Guilherme Barbosa](https://github.com/guii-barbosa)
->>>>>>> acf1fb3cb96e89167f8af8f495cfabf48136d720

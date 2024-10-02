@@ -28,6 +28,13 @@ CREATE TABLE genero (
 );
 
 
+CREATE TABLE acesso (
+    id_acesso SERIAL PRIMARY KEY,
+    nm_acesso VARCHAR(255) NOT NULL UNIQUE
+    dt_atualizacao TIMESTAMP DEFAULT NOW()
+);
+
+
 CREATE TABLE usuario (
     id_usuario SERIAL PRIMARY KEY,
     cd_inventario_avatar INT,
@@ -42,7 +49,7 @@ CREATE TABLE usuario (
 	dt_atualizacao TIMESTAMP DEFAULT NOW(),
     cd_acesso INT,
 	
-    FOREIGN KEY (cd_genero) REFERENCES genero(id_genero)
+    FOREIGN KEY (cd_genero) REFERENCES genero(id_genero),
     FOREIGN KEY (cd_acesso) REFERENCES acesso(id_acesso)
 );
 
@@ -59,11 +66,6 @@ CREATE TABLE anunciante (
     nr_cnpj VARCHAR(14) UNIQUE,
     nr_telefone VARCHAR(14) UNIQUE)
 	INHERITS (usuario);
-
-CREATE TABLE acesso (
-    id_acesso SERIAL PRIMARY KEY,
-    nm_acesso VARCHAR(255) NOT NULL UNIQUE
-);
 
 /*
 ================================================
@@ -92,12 +94,12 @@ CREATE TABLE evento (
     id_evento SERIAL PRIMARY KEY,
     cd_local INT,
     cd_anunciante INT,
-    qt_interesse INT,
+    qt_interesse INT DEFAULT 0,
     nm_evento VARCHAR(255),
     ds_evento TEXT,
     dt_inicio DATE,
     hr_inicio TIME,
-    dt_fim TIME,
+    dt_fim DATE,
     hr_fim TIME,
     url_documentacao TEXT,
     dt_atualizacao TIMESTAMP DEFAULT NOW(),
