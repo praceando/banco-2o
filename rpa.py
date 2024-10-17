@@ -26,4 +26,5 @@ conn_redis = redis.Redis(host=os.getenv("HOST_REDIS"),
                          password=os.getenv("PSWD_REDIS"))
 
 
+
  

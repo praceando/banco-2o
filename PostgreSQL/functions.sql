@@ -14,7 +14,7 @@ LANGUAGE plpgsql;
 
 
 -- function de inserir do id_avatar
-CREATE OR REPLACE FUNCTION FUNC_INSERIR_ID_AVATAR(
+CREATE OR REPLACE FUNCTION FNC_INSERIR_ID_AVATAR(
     p_id_usuario INT,
     p_id_avatar INT
 )
