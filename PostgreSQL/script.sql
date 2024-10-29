@@ -67,7 +67,6 @@ CREATE TABLE anunciante (
     dt_nascimento DATE CHECK (EXTRACT(YEAR FROM AGE(CURRENT_DATE, dt_nascimento)) >= 16),
     nm_empresa VARCHAR(255),
     nr_cnpj VARCHAR(14) UNIQUE,
-    nr_telefone VARCHAR(11) UNIQUE,
     FOREIGN KEY (id_anunciante) REFERENCES usuario(id_usuario)
 );
 
@@ -95,7 +94,17 @@ CREATE TABLE tag (
     id_tag SERIAL PRIMARY KEY,
     nm_tag VARCHAR(255),
     ds_categoria VARCHAR(255),
+    dt_desativacao TIMESTAMP,
 	dt_atualizacao TIMESTAMP DEFAULT NOW()
+);
+
+
+CREATE TABLE usuario_tag(
+    id_usuario_tag SERIAL PRIMARY KEY,
+    cd_consumidor INTEGER,
+    cd_tag INTEGER,
+    FOREIGN KEY (cd_usuario) REFERENCES usuario(id_usuario)
+    FOREIGN KEY (cd_tag) REFERENCES tag(id_tag)
 );
 
 
@@ -157,8 +166,8 @@ CREATE TABLE produto (
     nm_produto VARCHAR(255),
     ds_produto TEXT,
     vl_preco DECIMAL,
-    url_imagem TEXT,
     nm_categoria VARCHAR(255),
+    url_imagem TEXT,
     dt_desativacao TIMESTAMP,
 	dt_atualizacao TIMESTAMP DEFAULT NOW()
 );
@@ -228,5 +237,4 @@ CREATE TABLE pagamento (
 -- SELECT setval(pg_get_serial_sequence('produto', 'id_produto'), 1, false);
 -- SELECT setval(pg_get_serial_sequence('compra', 'id_compra'), 1, false);
 -- SELECT setval(pg_get_serial_sequence('pagamento', 'id_pagamento'), 1, false);
-
 

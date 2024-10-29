@@ -1,9 +1,0 @@
-Trigger para quantInteresse - Fernanda
-Trigger desativação - Guilherme
-+6 Triggers para logs -  Definir tabelas, três para gulherme e duas para fernanda
-
-Procedure para inserir evento + tag - Fernanda 
-Procedure para inser compra e atualizar status - Guilherme
-
-Function de inserir id_avatar - Fernanda
-Function de idade - Fernanda

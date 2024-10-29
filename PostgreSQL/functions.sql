@@ -1,12 +1,12 @@
 
 -- functions para calcular idade do usuario
-CREATE OR REPLACE FUNCTION FNC_CALCULAR_IDADE (dt_nascimento DATE)
+CREATE OR REPLACE FUNCTION FNC_CALCULAR_IDADE (p_dt_nascimento DATE)
 RETURNS INTEGER AS
 $$
 DECLARE
     idade INTEGER;
 BEGIN
-    idade := EXTRACT(YEAR FROM AGE(CURRENT_DATE, dt_nascimento));
+    idade := EXTRACT(YEAR FROM AGE(CURRENT_DATE, p_dt_nascimento));
     RETURN idade;
 END;
 $$
