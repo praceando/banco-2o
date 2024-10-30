@@ -4,7 +4,7 @@
 ================================================
 */
 
-CREATE OR REPLACE PROCEDURE PRC_INSERIR_EVENTO_TAGS(
+CREATE OR REPLACE PROCEDURE PRC_INSERIR_EVENTO_TAG(
     p_nm_evento VARCHAR,
     p_ds_evento TEXT,
     p_dt_inicio DATE,
@@ -53,7 +53,7 @@ $$;
 ================================================
 */
 
-CREATE OR REPLACE PROCEDURE PRC_INSERIR_INTERESSE_TAGS(
+CREATE OR REPLACE PROCEDURE PRC_INSERIR_USUARIO_TAG(
     p_cd_consumidor INTEGER,
     p_cd_evento INTEGER,
     p_tags VARCHAR[] 
@@ -65,8 +65,17 @@ DECLARE
     v_tag VARCHAR; 
 BEGIN
 
-    INSERT INTO interesse (cd_consumidor, cd_evento)
-    VALUES (p_cd_consumidor, p_cd_evento);
+    IF p_cd_evento IS NOT NULL THEN
+
+        INSERT INTO interesse (cd_consumidor, cd_evento)
+        VALUES (p_cd_consumidor, p_cd_evento);
+
+        SELECT ARRAY_AGG(t.nm_tag) FROM interesse i
+        JOIN evento_tag et ON i.cd_evento = et.cd_evento
+        JOIN tag t ON et.cd_tag = t.id_tag
+        INTO p_tags;
+
+    END IF;
 
     FOREACH v_tag IN ARRAY p_tags LOOP
 
@@ -74,7 +83,7 @@ BEGIN
         FROM tag 
         WHERE UPPER(nm_tag) = UPPER(v_tag);
 
-        IF NOT FOUND THEN
+        IF v_id_tag IS NULL THEN
             RAISE EXCEPTION 'Tag % não encontrada', v_tag;
         END IF;
 
@@ -93,11 +102,11 @@ $$;
 ================================================
 */
 
-CREATE OR REPLACE PROCEDURE PRC_ATUALIZAR_STATUS_COMPRA(
+CREATE OR REPLACE PROCEDURE PRC_REALIZAR_COMPRA(
     p_cd_usuario INTEGER,
     p_cd_produto INTEGER,
     p_cd_evento INTEGER,
-    p_vl_total INTEGER
+    p_vl_total DECIMAL
 )
 LANGUAGE 'plpgsql' AS $$	
 DECLARE
@@ -109,10 +118,12 @@ BEGIN
     INSERT INTO compra(cd_usuario,cd_produto,cd_evento,dt_compra,vl_total)
     VALUES(p_cd_usuario,p_cd_produto, p_cd_evento,v_dt_compra,p_vl_total);
 
-    UPDATE produto SET qt_estoque=qt_estoque-1
-    WHERE id_produto=p_cd_produto;
+    IF p_cd_evento IS NULL THEN
+
+      UPDATE produto SET qt_estoque=qt_estoque-1
+      WHERE id_produto=p_cd_produto;
     
-COMMIT;
+    END IF;
 END; $$;
 
 /*
@@ -136,6 +147,5 @@ BEGIN
 
     UPDATE compra SET ds_status='Concluída'
     WHERE id_compra=p_cd_compra;
-    
-COMMIT;
+
 END; $$;

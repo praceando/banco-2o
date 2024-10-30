@@ -103,7 +103,7 @@ CREATE TABLE usuario_tag(
     id_usuario_tag SERIAL PRIMARY KEY,
     cd_consumidor INTEGER,
     cd_tag INTEGER,
-    FOREIGN KEY (cd_usuario) REFERENCES usuario(id_usuario)
+    FOREIGN KEY (cd_consumidor) REFERENCES consumidor(id_consumidor),
     FOREIGN KEY (cd_tag) REFERENCES tag(id_tag)
 );
 
@@ -197,44 +197,26 @@ CREATE TABLE pagamento (
 );
 
 
--- DROP TABLE IF EXISTS log_usuario CASCADE;
--- DROP TABLE IF EXISTS log_local CASCADE;
--- DROP TABLE IF EXISTS log_tag CASCADE;
--- DROP TABLE IF EXISTS log_evento CASCADE;
--- DROP TABLE IF EXISTS log_frase_sustentavel CASCADE;
--- DROP TABLE IF EXISTS log_produto CASCADE;
--- DROP TABLE IF EXISTS log_compra CASCADE;
--- DROP TABLE IF EXISTS log_pagamento CASCADE;
--- DROP TABLE IF EXISTS usuario CASCADE;
--- DROP TABLE IF EXISTS consumidor CASCADE;
--- DROP TABLE IF EXISTS anunciante CASCADE;
--- DROP TABLE IF EXISTS genero CASCADE;
--- DROP TABLE IF EXISTS acesso CASCADE;
--- DROP TABLE IF EXISTS local CASCADE;
--- DROP TABLE IF EXISTS tag CASCADE;
--- DROP TABLE IF EXISTS evento CASCADE;
--- DROP TABLE IF EXISTS evento_tag CASCADE;
--- DROP TABLE IF EXISTS interesse CASCADE;
--- DROP TABLE IF EXISTS frase_sustentavel CASCADE;
--- DROP TABLE IF EXISTS produto CASCADE;
--- DROP TABLE IF EXISTS compra CASCADE;
--- DROP TABLE IF EXISTS pagamento CASCADE;
-
-
--- SELECT setval(pg_get_serial_sequence('log_usuario', 'id_log'), 1, false);
--- SELECT setval(pg_get_serial_sequence('log_local', 'id_log'), 1, false);
--- SELECT setval(pg_get_serial_sequence('log_tag', 'id_log'), 1, false);
--- SELECT setval(pg_get_serial_sequence('log_evento', 'id_log'), 1, false);
--- SELECT setval(pg_get_serial_sequence('log_frase_sustentavel', 'id_log'), 1, false);
--- SELECT setval(pg_get_serial_sequence('log_produto', 'id_log'), 1, false);
--- SELECT setval(pg_get_serial_sequence('log_compra', 'id_log'), 1, false);
--- SELECT setval(pg_get_serial_sequence('log_pagamento', 'id_log'), 1, false);
--- SELECT setval(pg_get_serial_sequence('usuario', 'id_usuario'), 1, false);
--- SELECT setval(pg_get_serial_sequence('local', 'id_local'), 1, false);
--- SELECT setval(pg_get_serial_sequence('tag', 'id_tag'), 1, false);
--- SELECT setval(pg_get_serial_sequence('evento', 'id_evento'), 1, false);
--- SELECT setval(pg_get_serial_sequence('frase_sustentavel', 'id_frase_sustentavel'), 1, false);
--- SELECT setval(pg_get_serial_sequence('produto', 'id_produto'), 1, false);
--- SELECT setval(pg_get_serial_sequence('compra', 'id_compra'), 1, false);
--- SELECT setval(pg_get_serial_sequence('pagamento', 'id_pagamento'), 1, false);
+TRUNCATE TABLE log_usuario RESTART IDENTITY CASCADE;
+TRUNCATE TABLE log_local RESTART IDENTITY CASCADE;
+TRUNCATE TABLE log_tag RESTART IDENTITY CASCADE;
+TRUNCATE TABLE log_evento RESTART IDENTITY CASCADE;
+TRUNCATE TABLE log_frase_sustentavel RESTART IDENTITY CASCADE;
+TRUNCATE TABLE log_produto RESTART IDENTITY CASCADE;
+TRUNCATE TABLE log_compra RESTART IDENTITY CASCADE;
+TRUNCATE TABLE log_pagamento RESTART IDENTITY CASCADE;
+TRUNCATE TABLE usuario RESTART IDENTITY CASCADE;
+TRUNCATE TABLE consumidor RESTART IDENTITY CASCADE;
+TRUNCATE TABLE anunciante RESTART IDENTITY CASCADE;
+TRUNCATE TABLE genero RESTART IDENTITY CASCADE;
+TRUNCATE TABLE acesso RESTART IDENTITY CASCADE;
+TRUNCATE TABLE local RESTART IDENTITY CASCADE;
+TRUNCATE TABLE tag RESTART IDENTITY CASCADE;
+TRUNCATE TABLE evento RESTART IDENTITY CASCADE;
+TRUNCATE TABLE evento_tag RESTART IDENTITY CASCADE;
+TRUNCATE TABLE interesse RESTART IDENTITY CASCADE;
+TRUNCATE TABLE frase_sustentavel RESTART IDENTITY CASCADE;
+TRUNCATE TABLE produto RESTART IDENTITY CASCADE;
+TRUNCATE TABLE compra RESTART IDENTITY CASCADE;
+TRUNCATE TABLE pagamento RESTART IDENTITY CASCADE;
 

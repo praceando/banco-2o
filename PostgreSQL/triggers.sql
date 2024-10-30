@@ -52,9 +52,6 @@ EXECUTE FUNCTION fnc_atualiza_qt_interesse();
     FUNÇÃO DE LOG       
 ================================================
 */
-
-SELECT * FROM pg_extension;
-
 CREATE EXTENSION IF NOT EXISTS hstore;
 
 CREATE OR REPLACE FUNCTION fnc_log_geral() RETURNS TRIGGER AS $$
