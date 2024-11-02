@@ -4,7 +4,7 @@
 ================================================
 */
 
-CREATE OR REPLACE FUNCTION FUNC_INSERIR_EVENTO_TAG(
+CREATE OR REPLACE PROCEDURE PRC_INSERIR_EVENTO_TAG(
     p_nm_evento VARCHAR,
     p_ds_evento TEXT,
     p_dt_inicio DATE,
@@ -14,19 +14,19 @@ CREATE OR REPLACE FUNCTION FUNC_INSERIR_EVENTO_TAG(
     p_url_documentacao TEXT,
     p_cd_local INTEGER,
     p_cd_anunciante INTEGER,
-    p_tags VARCHAR[]
-) RETURNS INTEGER
+    p_tags VARCHAR[],
+    OUT p_id_evento INTEGER  -- Parâmetro OUT para o ID do evento
+)
 LANGUAGE plpgsql
 AS $$
 DECLARE
-    v_id_evento INTEGER;
     v_id_tag INTEGER;
     v_tag VARCHAR;  
 BEGIN
     -- Insere o evento e captura o ID do novo evento
     INSERT INTO evento (nm_evento, ds_evento, dt_inicio, hr_inicio, dt_fim, hr_fim, url_documentacao, cd_local, cd_anunciante)
     VALUES (p_nm_evento, p_ds_evento, p_dt_inicio, p_hr_inicio, p_dt_fim, p_hr_fim, p_url_documentacao, p_cd_local, p_cd_anunciante)
-    RETURNING id_evento INTO v_id_evento;
+    RETURNING id_evento INTO p_id_evento;
 
     -- Loop pelas tags e associa ao evento recém-criado
     FOREACH v_tag IN ARRAY p_tags LOOP
@@ -39,13 +39,11 @@ BEGIN
         END IF;
 
         INSERT INTO evento_tag (cd_evento, cd_tag) 
-        VALUES (v_id_evento, v_id_tag);
+        VALUES (p_id_evento, v_id_tag);
     END LOOP;
-
-    -- Retorna o ID do evento
-    RETURN v_id_evento;
 END;
 $$;
+
 
 
 
