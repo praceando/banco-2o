@@ -106,25 +106,29 @@ CREATE OR REPLACE PROCEDURE PRC_REALIZAR_COMPRA(
     p_cd_usuario INTEGER,
     p_cd_produto INTEGER,
     p_cd_evento INTEGER,
-    p_vl_total DECIMAL
+    p_vl_total DECIMAL,
+    OUT p_id_compra INTEGER 
 )
-LANGUAGE 'plpgsql' AS $$	
+LANGUAGE plpgsql AS $$	
 DECLARE
     v_dt_compra TIMESTAMP;
 BEGIN
-
+    -- Obtém a data e hora atual
     SELECT NOW() INTO v_dt_compra;
 
-    INSERT INTO compra(cd_usuario,cd_produto,cd_evento,dt_compra,vl_total)
-    VALUES(p_cd_usuario,p_cd_produto, p_cd_evento,v_dt_compra,p_vl_total);
+    -- Insere a compra e captura o ID da nova compra
+    INSERT INTO compra(cd_usuario, cd_produto, cd_evento, dt_compra, vl_total)
+    VALUES(p_cd_usuario, p_cd_produto, p_cd_evento, v_dt_compra, p_vl_total)
+    RETURNING id_compra INTO p_id_compra;
 
+    -- Atualiza o estoque do produto se o código do evento for nulo
     IF p_cd_evento IS NULL THEN
-
-      UPDATE produto SET qt_estoque=qt_estoque-1
-      WHERE id_produto=p_cd_produto;
-    
+        UPDATE produto 
+        SET qt_estoque = qt_estoque - 1
+        WHERE id_produto = p_cd_produto;
     END IF;
-END; $$;
+END;
+$$;
 
 /*
 ================================================
