@@ -8,12 +8,10 @@
 
 CREATE OR REPLACE FUNCTION fnc_desativar_usuario() RETURNS TRIGGER AS $$
 BEGIN 
-	UPDATE usuario SET dt_desativacao75=NOW() 
-	WHERE usuario.id_usuario = OLD.id_usuario;
 
-	IF (SELECT OLD.nr_cnpj IS NOT NULL) THEN
+	IF (EXISTS(SELECT 1 FROM anunciante WHERE anunciante.id_anunciante=OLD.id_usuario)) THEN
 		UPDATE evento SET dt_desativacao=NOW()
-		WHERE evento.cd_anunciante=OLD.id_usuario;
+		WHERE evento.cd_anunciante=OLD.id_anunciante;
 	END IF;
 	
 	RETURN OLD;
@@ -25,16 +23,40 @@ CREATE OR REPLACE TRIGGER trg_desativar_usuario
 	FOR EACH ROW EXECUTE FUNCTION fnc_desativar_usuario();
 
 /*
+
+/*
+================================================
+         DESATIVAÇÃO LOCAL                 
+================================================
+*/
+
+CREATE OR REPLACE FUNCTION fnc_desativar_local() RETURNS TRIGGER AS $$
+BEGIN 
+	
+	UPDATE evento SET dt_desativacao=NOW()
+	WHERE evento.cd_local=OLD.id_local;
+	
+	RETURN OLD;
+END;
+$$ LANGUAGE 'plpgsql';
+
+CREATE OR REPLACE TRIGGER trg_desativar_local
+	BEFORE UPDATE OF dt_desativacao ON local
+	FOR EACH ROW EXECUTE FUNCTION fnc_desativar_local();
+
+/*
+
 ================================================
          QUANTIDADE DE INTERESSE             
 ================================================
 */
-CREATE OR REPLACE FUNCTION fnc_atualiza_qt_interesse()
+CREATE OR REPLACE FUNCTION fnc_atualizar_qt_interesse()
 RETURNS TRIGGER AS
 $$
 BEGIN
-    UPDATE evento
-    SET qt_interesse = qt_interesse + 1
+    UPDATE evento SET 
+	    qt_interesse = qt_interesse + 1,
+		dt_atualizacao = NOW()
     WHERE id_evento = NEW.cd_evento;
 
     RETURN NEW;
@@ -142,8 +164,6 @@ CREATE TABLE log_usuario(
 	nm_usuario VARCHAR(255),
 	nm_operacao VARCHAR(255),
 	dt_operacao TIMESTAMP,
-
-	FOREIGN KEY (cd_usuario) REFERENCES usuario(id_usuario)
 );
 
 CREATE OR REPLACE TRIGGER trg_log_usuario
@@ -165,8 +185,6 @@ CREATE TABLE log_local(
 	nm_usuario VARCHAR(255),
 	nm_operacao VARCHAR(255),
 	dt_operacao TIMESTAMP,
-
-	FOREIGN KEY (cd_local) REFERENCES local(id_local)
 );
 
 CREATE OR REPLACE TRIGGER trg_log_local
@@ -188,8 +206,6 @@ CREATE TABLE log_tag(
 	nm_usuario VARCHAR(255),
 	nm_operacao VARCHAR(255),
 	dt_operacao TIMESTAMP,
-
-	FOREIGN KEY (cd_tag) REFERENCES tag(id_tag)
 );
 
 CREATE OR REPLACE TRIGGER trg_log_tag
@@ -211,8 +227,6 @@ CREATE TABLE log_evento(
 	nm_usuario VARCHAR(255),
 	nm_operacao VARCHAR(255),
 	dt_operacao TIMESTAMP,
-
-	FOREIGN KEY (cd_evento) REFERENCES evento(id_evento)
 );
 
 CREATE OR REPLACE TRIGGER trg_log_evento
@@ -233,8 +247,7 @@ CREATE TABLE log_frase_sustentavel(
 	vl_campo_new VARCHAR(255),
 	nm_usuario VARCHAR(255),
 	nm_operacao VARCHAR(255),
-	dt_operacao TIMESTAMP,
-	FOREIGN KEY (cd_frase_sustentavel) REFERENCES frase_sustentavel(id_frase_sustentavel)
+	dt_operacao TIMESTAMP
 );
 
 CREATE OR REPLACE TRIGGER trg_log_frase_sustentavel
@@ -256,8 +269,6 @@ CREATE TABLE log_produto(
 	nm_usuario VARCHAR(255),
 	nm_operacao VARCHAR(255),
 	dt_operacao TIMESTAMP,
-
-	FOREIGN KEY (cd_produto) REFERENCES produto(id_produto)
 );
 
 CREATE OR REPLACE TRIGGER trg_log_produto
@@ -279,8 +290,6 @@ CREATE TABLE log_compra(
 	nm_usuario VARCHAR(255),
 	nm_operacao VARCHAR(255),
 	dt_operacao TIMESTAMP,
-
-	FOREIGN KEY (cd_compra) REFERENCES compra(id_compra)
 );
 
 CREATE OR REPLACE TRIGGER trg_log_compra
@@ -302,8 +311,6 @@ CREATE TABLE log_pagamento(
 	nm_usuario VARCHAR(255),
 	nm_operacao VARCHAR(255),
 	dt_operacao TIMESTAMP,
-
-	FOREIGN KEY (cd_pagamento) REFERENCES pagamento(id_pagamento)
 );
 
 CREATE OR REPLACE TRIGGER trg_log_pagamento
