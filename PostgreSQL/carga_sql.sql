@@ -193,8 +193,7 @@ CALL PRC_INSERIR_USUARIO_TAG(6, 8, NULL);
 INSERT INTO produto (id_produto,qt_estoque, nm_produto, ds_produto, vl_preco, nm_categoria) VALUES 
 (1,100, 'Camiseta Ecológica', 'Camiseta produzida com algodão orgânico e tintas naturais, ideal para quem quer vestir sustentabilidade.', 59.90, 'Vestuário'),
 (2,150, 'Caneca de Bambu Reutilizável', 'Caneca feita de bambu sustentável, perfeita para substituir copos descartáveis e reduzir o impacto ambiental.', 34.90, 'Utilidades Domésticas'),
-(3,200, 'Ecobag Sustentável', 'Bolsa reutilizável feita com fibras de garrafas PET recicladas, resistente e estilosa para usar no dia a dia.', 24.90, 'Acessórios');
-
+(4,100, 'Premium', 'Acesso Premium com benefícios exclusivos', 29.99, 'assinatura', current_timestamp);
 -- Compras de eventos usando PRC_REALIZAR_COMPRA
 CALL PRC_REALIZAR_COMPRA(13, NULL, 1, 24.90);
 CALL PRC_REALIZAR_COMPRA(14, NULL, 2, 15.90);
