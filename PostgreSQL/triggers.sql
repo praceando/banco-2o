@@ -8,19 +8,19 @@
 
 CREATE OR REPLACE FUNCTION fnc_desativar_usuario() RETURNS TRIGGER AS $$
 BEGIN 
-
-	IF (EXISTS(SELECT 1 FROM anunciante WHERE anunciante.id_anunciante=OLD.id_usuario)) THEN
-		UPDATE evento SET dt_desativacao=NOW()
-		WHERE evento.cd_anunciante=OLD.id_anunciante;
-	END IF;
-	
-	RETURN OLD;
+    IF OLD.dt_desativacao IS NULL THEN 
+        UPDATE evento 
+        SET dt_desativacao = NOW()
+        WHERE cd_anunciante = OLD.id_usuario; 
+    END IF;
+    
+    RETURN NEW; 
 END;
 $$ LANGUAGE 'plpgsql';
 
 CREATE OR REPLACE TRIGGER trg_desativar_usuario
-	BEFORE UPDATE OF dt_desativacao ON usuario
-	FOR EACH ROW EXECUTE FUNCTION fnc_desativar_usuario();
+    BEFORE UPDATE OF dt_desativacao ON usuario
+    FOR EACH ROW EXECUTE FUNCTION fnc_desativar_usuario();
 
 /*
 
