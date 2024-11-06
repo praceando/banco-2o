@@ -13,9 +13,8 @@ collectionRecorrencia = conexao["dbPraceando"]["recorrencia"]
 collectionConquista = conexao["dbPraceando"]["conquista"]
 collectionConquistaUsusario = conexao["dbPraceando"]["conquista_usuario"]
 
-collectionConquista
-    
-# inserindo avaliações
+
+# Inserindo avaliações com comentários variados
 print("Avaliações: \n")
 collectionAvaliacao.insert_many([
     {
@@ -24,7 +23,7 @@ collectionAvaliacao.insert_many([
         "cd_usuario": 1,
         "nota": 5,
         "comentario": "Evento incrível! Superou minhas expectativas.",
-        "data_atualizacao": datetime.now()
+        "data_atualizacao": datetime.now().isoformat()
     },
     {
         "id_avaliacao": 2,
@@ -32,7 +31,7 @@ collectionAvaliacao.insert_many([
         "cd_usuario": 3,
         "nota": 4,
         "comentario": "Gostei do evento, mas poderia ter mais opções de alimentação.",
-        "data_atualizacao": datetime.now()
+        "data_atualizacao": datetime.now().isoformat()
     },
     {
         "id_avaliacao": 3,
@@ -40,7 +39,7 @@ collectionAvaliacao.insert_many([
         "cd_usuario": 5,
         "nota": 3,
         "comentario": "Achei que o evento foi mediano, precisa de mais atrações.",
-        "data_atualizacao": datetime.now()
+        "data_atualizacao": datetime.now().isoformat()
     },
     {
         "id_avaliacao": 4,
@@ -48,28 +47,31 @@ collectionAvaliacao.insert_many([
         "cd_usuario": 7,
         "nota": 5,
         "comentario": "Excelente organização, com certeza participarei novamente.",
-        "data_atualizacao": datetime.now()
+        "data_atualizacao": datetime.now().isoformat()
     },
     {
         "id_avaliacao": 5,
         "cd_evento": 1,
         "cd_usuario": 9,
         "nota": 4,
-        "data_atualizacao": datetime.now()
+        "comentario": "Muito bom, mas faltaram algumas atividades para crianças.",
+        "data_atualizacao": datetime.now().isoformat()
     },
     {
         "id_avaliacao": 6,
         "cd_evento": 2,
         "cd_usuario": 2,
         "nota": 5,
-        "data_atualizacao": datetime.now()
+        "comentario": "Adorei o evento, foi muito divertido!",
+        "data_atualizacao": datetime.now().isoformat()
     },
     {
         "id_avaliacao": 7,
         "cd_evento": 2,
         "cd_usuario": 4,
         "nota": 4,
-        "data_atualizacao": datetime.now()
+        "comentario": "O evento foi bem organizado, mas estava muito cheio.",
+        "data_atualizacao": datetime.now().isoformat()
     },
     {
         "id_avaliacao": 8,
@@ -77,7 +79,7 @@ collectionAvaliacao.insert_many([
         "cd_usuario": 6,
         "nota": 3,
         "comentario": "O evento estava ok, mas esperava mais atrações culturais.",
-        "data_atualizacao": datetime.now()
+        "data_atualizacao": datetime.now().isoformat()
     },
     {
         "id_avaliacao": 9,
@@ -85,14 +87,15 @@ collectionAvaliacao.insert_many([
         "cd_usuario": 8,
         "nota": 5,
         "comentario": "Tudo muito bem organizado, amei!",
-        "data_atualizacao": datetime.now()
+        "data_atualizacao": datetime.now().isoformat()
     },
     {
         "id_avaliacao": 10,
         "cd_evento": 2,
         "cd_usuario": 10,
         "nota": 4,
-        "data_atualizacao": datetime.now()
+        "comentario": "Gostei do evento, só poderia ser em um local maior.",
+        "data_atualizacao": datetime.now().isoformat()
     },
     {
         "id_avaliacao": 11,
@@ -100,7 +103,7 @@ collectionAvaliacao.insert_many([
         "cd_usuario": 3,
         "nota": 5,
         "comentario": "Evento muito bom para quem gosta de artesanato!",
-        "data_atualizacao": datetime.now()
+        "data_atualizacao": datetime.now().isoformat()
     },
     {
         "id_avaliacao": 12,
@@ -108,28 +111,31 @@ collectionAvaliacao.insert_many([
         "cd_usuario": 5,
         "nota": 3,
         "comentario": "Os produtos artesanais eram bonitos, mas um pouco caros.",
-        "data_atualizacao": datetime.now()
+        "data_atualizacao": datetime.now().isoformat()
     },
     {
         "id_avaliacao": 13,
         "cd_evento": 3,
         "cd_usuario": 7,
         "nota": 4,
-        "data_atualizacao": datetime.now()
+        "comentario": "Um bom evento para a família, muito tranquilo.",
+        "data_atualizacao": datetime.now().isoformat()
     },
     {
         "id_avaliacao": 14,
         "cd_evento": 3,
         "cd_usuario": 9,
         "nota": 5,
-        "data_atualizacao": datetime.now()
+        "comentario": "Maravilhoso! Vários produtos artesanais de qualidade.",
+        "data_atualizacao": datetime.now().isoformat()
     },
     {
         "id_avaliacao": 15,
         "cd_evento": 3,
         "cd_usuario": 11,
         "nota": 4,
-        "data_atualizacao": datetime.now()
+        "comentario": "Evento organizado e ambiente muito agradável.",
+        "data_atualizacao": datetime.now().isoformat()
     },
     {
         "id_avaliacao": 16,
@@ -137,7 +143,7 @@ collectionAvaliacao.insert_many([
         "cd_usuario": 1,
         "nota": 4,
         "comentario": "A música estava ótima, ambiente agradável e seguro.",
-        "data_atualizacao": datetime.now()
+        "data_atualizacao": datetime.now().isoformat()
     },
     {
         "id_avaliacao": 17,
@@ -145,21 +151,23 @@ collectionAvaliacao.insert_many([
         "cd_usuario": 6,
         "nota": 5,
         "comentario": "Excelente banda, valeu muito a pena.",
-        "data_atualizacao": datetime.now()
+        "data_atualizacao": datetime.now().isoformat()
     },
     {
         "id_avaliacao": 18,
         "cd_evento": 4,
         "cd_usuario": 8,
         "nota": 3,
-        "data_atualizacao": datetime.now()
+        "comentario": "Evento bom, mas o espaço estava muito lotado.",
+        "data_atualizacao": datetime.now().isoformat()
     },
     {
         "id_avaliacao": 19,
         "cd_evento": 4,
         "cd_usuario": 10,
         "nota": 4,
-        "data_atualizacao": datetime.now()
+        "comentario": "Ambiente seguro e confortável, recomendo.",
+        "data_atualizacao": datetime.now().isoformat()
     },
     {
         "id_avaliacao": 20,
@@ -167,168 +175,80 @@ collectionAvaliacao.insert_many([
         "cd_usuario": 12,
         "nota": 5,
         "comentario": "Ambiente familiar, muito seguro e divertido.",
-        "data_atualizacao": datetime.now()
-    },
-    {
-        "id_avaliacao": 21,
-        "cd_evento": 5,
-        "cd_usuario": 2,
-        "nota": 5,
-        "comentario": "Corrida bem organizada, ótimo para praticar esporte com a família.",
-        "data_atualizacao": datetime.now()
-    },
-    {
-        "id_avaliacao": 22,
-        "cd_evento": 5,
-        "cd_usuario": 4,
-        "nota": 4,
-        "comentario": "Gostei bastante, principalmente do apoio ao longo do percurso.",
-        "data_atualizacao": datetime.now()
-    },
-    {
-        "id_avaliacao": 23,
-        "cd_evento": 5,
-        "cd_usuario": 6,
-        "nota": 4,
-        "comentario": "Uma experiência ótima para quem gosta de correr.",
-        "data_atualizacao": datetime.now()
-    },
-    {
-        "id_avaliacao": 24,
-        "cd_evento": 5,
-        "cd_usuario": 9,
-        "nota": 5,
-        "comentario": "Parabéns aos organizadores! Evento incrível.",
-        "data_atualizacao": datetime.now()
-    },
-    {
-        "id_avaliacao": 25,
-        "cd_evento": 6,
-        "cd_usuario": 3,
-        "nota": 5,
-        "comentario": "Muito relaxante, as aulas de yoga foram incríveis.",
-        "data_atualizacao": datetime.now()
-    },
-    {
-        "id_avaliacao": 26,
-        "cd_evento": 6,
-        "cd_usuario": 5,
-        "nota": 4,
-        "comentario": "A meditação guiada foi ótima, me senti muito bem.",
-        "data_atualizacao": datetime.now()
-    },
-    {
-        "id_avaliacao": 27,
-        "cd_evento": 6,
-        "cd_usuario": 7,
-        "nota": 3,
-        "comentario": "Acho que poderia ter mais instrutores para atender a todos.",
-        "data_atualizacao": datetime.now()
-    },
-    {
-        "id_avaliacao": 28,
-        "cd_evento": 6,
-        "cd_usuario": 11,
-        "nota": 5,
-        "data_atualizacao": datetime.now()
-    },
-    {
-        "id_avaliacao": 29,
-        "cd_evento": 6,
-        "cd_usuario": 12,
-        "nota": 4,
-        "data_atualizacao": datetime.now()
-    },
-    {
-        "id_avaliacao": 30,
-        "cd_evento": 7,
-        "cd_usuario": 1,
-        "nota": 5,
-        "data_atualizacao": datetime.now()
-    },
-    {
-        "id_avaliacao": 31,
-        "cd_evento": 7,
-        "cd_usuario": 4,
-        "nota": 4,
-        "comentario": "Ambiente ótimo para os pets, bem organizado.",
-        "data_atualizacao": datetime.now()
-    },
-    {
-        "id_avaliacao": 32,
-        "cd_evento": 7,
-        "cd_usuario": 6,
-        "nota": 3,
-        "comentario": "Gostei, mas o espaço estava um pouco pequeno para a quantidade de pets.",
-        "data_atualizacao": datetime.now()
-    },
-    {
-        "id_avaliacao": 33,
-        "cd_evento": 7,
-        "cd_usuario": 9,
-        "nota": 5,
-        "comentario": "Meu cachorro amou, farei questão de voltar!",
-        "data_atualizacao": datetime.now()
-    },
-    {
-        "id_avaliacao": 34,
-        "cd_evento": 8,
-        "cd_usuario": 2,
-        "nota": 5,
-        "data_atualizacao": datetime.now()
-    },
-    {
-        "id_avaliacao": 35,
-        "cd_evento": 8,
-        "cd_usuario": 5,
-        "nota": 4,
-        "comentario": "Muito educativo, aprendi bastante sobre adestramento.",
-        "data_atualizacao": datetime.now()
-    },
-    {
-        "id_avaliacao": 36,
-        "cd_evento": 8,
-        "cd_usuario": 8,
-        "nota": 5,
-        "comentario": "Instrutores bem qualificados e prestativos.",
-        "data_atualizacao": datetime.now()
-    },
-    {
-        "id_avaliacao": 37,
-        "cd_evento": 8,
-        "cd_usuario": 11,
-        "nota": 4,
-        "data_atualizacao": datetime.now()
+        "data_atualizacao": datetime.now().isoformat()
     }
 ])
 
+import pymongo as mongo
+from dotenv import load_dotenv
+import os
+from datetime import datetime
 
-# Inserir as recorrências
-print("Recorrencias: \n")
+# Carregando variáveis de ambiente
+load_dotenv(dotenv_path=".env")
+
+# Conectando ao MongoDB
+conexao = mongo.MongoClient(os.getenv("LINK_MONGO"))
+
+# Definindo a coleção de recorrência
+collectionRecorrencia = conexao["dbPraceando"]["recorrencia"]
+
+# Inserindo recorrências diárias para os eventos
+print("Recorrências: \n")
 collectionRecorrencia.insert_many([
     {
         "id_recorrencia": 1,
         "id_evento": 1,
         "nm_tipo": "Diária",
-        "dt_atualizacao": datetime.now(),
+        "dt_atualizacao": datetime.now().isoformat()
     },
     {
         "id_recorrencia": 2,
         "id_evento": 2,
-        "nm_tipo": "Semanal",
-        "dt_atualizacao": datetime.now(),
-        "ds_dias_semana": ["sábado","domingo"],
+        "nm_tipo": "Diária",
+        "dt_atualizacao": datetime.now().isoformat()
     },
     {
         "id_recorrencia": 3,
         "id_evento": 3,
-        "nm_tipo": "Mensal",
-        "dt_atualizacao": datetime.now(),
-        "nr_dia_mes": 15
+        "nm_tipo": "Diária",
+        "dt_atualizacao": datetime.now().isoformat()
+    },
+    {
+        "id_recorrencia": 4,
+        "id_evento": 4,
+        "nm_tipo": "Diária",
+        "dt_atualizacao": datetime.now().isoformat()
+    },
+    {
+        "id_recorrencia": 5,
+        "id_evento": 5,
+        "nm_tipo": "Diária",
+        "dt_atualizacao": datetime.now().isoformat()
+    },
+    {
+        "id_recorrencia": 6,
+        "id_evento": 6,
+        "nm_tipo": "Diária",
+        "dt_atualizacao": datetime.now().isoformat()
+    },
+    {
+        "id_recorrencia": 7,
+        "id_evento": 7,
+        "nm_tipo": "Diária",
+        "dt_atualizacao": datetime.now().isoformat()
+    },
+    {
+        "id_recorrencia": 8,
+        "id_evento": 8,
+        "nm_tipo": "Diária",
+        "dt_atualizacao": datetime.now().isoformat()
     }
 ])
 
-print("conquistas: \n")
+
+
+print("Conquistas: \n")
 collectionConquista.insert_many([
     {
         "id_conquista": 1,
@@ -375,7 +295,6 @@ collectionConquista.insert_many([
         "nm_categoria": "evento",
         "qt_polen": 40,
     },
-    
     {
         "id_conquista": 6,
         "nm_conquista": "Gourmet de Praça",
@@ -394,11 +313,10 @@ collectionConquista.insert_many([
         "nm_categoria": "avaliacao",
         "qt_polen": 70,
     },
-
     {
         "id_conquista": 8,
         "nm_conquista": "Influenciador Local",
-        "ds_conquista": "Faça um evento que que tenha mais de 50 interessados.",
+        "ds_conquista": "Faça um evento que tenha mais de 50 interessados.",
         "vl_meta": 50,
         "nm_tipo": "Anunciante",
         "nm_categoria": "interesse",
@@ -406,8 +324,8 @@ collectionConquista.insert_many([
     },
     {
         "id_conquista": 9,
-        "nm_conquista": "Colecionador de faces",
-        "ds_conquista": "Compre 5 avatares e ganhe um outro personagem premium de graça ",
+        "nm_conquista": "Colecionador de Faces",
+        "ds_conquista": "Compre 5 avatares e ganhe um outro personagem premium de graça.",
         "vl_meta": 5,
         "nm_tipo": "Anunciante",
         "nm_categoria": "compra",
@@ -428,7 +346,7 @@ collectionConquista.insert_many([
         "ds_conquista": "Participe de 3 eventos fitness em parques e praças.",
         "vl_meta": 3,
         "nm_tipo": "Consumidor",
-        "nm_categoria": "local",
+        "nm_categoria": "evento",
         "qt_polen": 35,
     },
     {
@@ -436,12 +354,10 @@ collectionConquista.insert_many([
         "nm_conquista": "Embaixador do Verde",
         "ds_conquista": "Participe de um evento ecológico em busca do reflorestamento.",
         "vl_meta": 1,
-        "qt_atividade": 20,
         "nm_tipo": "Anunciante",
-        "nm_categoria": "local",
+        "nm_categoria": "evento",
         "qt_polen": 90,
     },
-
     {
         "id_conquista": 13,
         "nm_conquista": "Desbravador Tecnológico",
@@ -462,8 +378,7 @@ collectionConquista.insert_many([
     }
 ])
 
-
-print("Conquistsas usuário: \n")
+print("Conquistas Usuário: \n")
 collectionConquistaUsusario.insert_many([
     {"id_conquista_user": 1, "cd_usuario": 1, "cd_conquista": 1, "vl_atingido": 3},
     {"id_conquista_user": 2, "cd_usuario": 1, "cd_conquista": 10, "vl_atingido": 2},
@@ -482,7 +397,6 @@ collectionConquistaUsusario.insert_many([
     {"id_conquista_user": 15, "cd_usuario": 11, "cd_conquista": 3, "vl_atingido": 4},
     {"id_conquista_user": 16, "cd_usuario": 12, "cd_conquista": 4, "vl_atingido": 3},
     {"id_conquista_user": 17, "cd_usuario": 12, "cd_conquista": 14, "vl_atingido": 2},
-
     {"id_conquista_user": 18, "cd_usuario": 13, "cd_conquista": 5, "vl_atingido": 5},
     {"id_conquista_user": 19, "cd_usuario": 13, "cd_conquista": 7, "vl_atingido": 30},
     {"id_conquista_user": 20, "cd_usuario": 14, "cd_conquista": 6, "vl_atingido": 1},
