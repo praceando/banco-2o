@@ -22,7 +22,6 @@ CREATE OR REPLACE TRIGGER trg_desativar_usuario
     BEFORE UPDATE OF dt_desativacao ON usuario
     FOR EACH ROW EXECUTE FUNCTION fnc_desativar_usuario();
 
-/*
 
 /*
 ================================================
@@ -68,6 +67,30 @@ CREATE OR REPLACE TRIGGER trg_atualiza_qt_interesse
 AFTER INSERT ON interesse
 FOR EACH ROW
 EXECUTE FUNCTION fnc_atualiza_qt_interesse();
+
+/*
+================================================
+        ASSINATURA PREMIUM                 
+================================================
+*/
+CREATE OR REPLACE FUNCTION func_tornar_usuario_premium()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.cd_produto = 4 THEN  
+        UPDATE usuario
+        SET is_premium = TRUE
+        WHERE id_usuario = NEW.cd_usuario;
+    END IF;
+    
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_comprar_premium
+AFTER INSERT ON compra
+FOR EACH ROW
+EXECUTE FUNCTION func_tornar_usuario_premium();
+
 
 /*
 ================================================
