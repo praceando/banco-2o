@@ -29,19 +29,24 @@ CREATE OR REPLACE TRIGGER trg_desativar_usuario
 ================================================
 */
 
-CREATE OR REPLACE FUNCTION fnc_desativar_local() RETURNS TRIGGER AS $$
-BEGIN 
-	
-	UPDATE evento SET dt_desativacao=NOW()
-	WHERE evento.cd_local=OLD.id_local;
-	
-	RETURN OLD;
+CREATE OR REPLACE FUNCTION func_desativar_local()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.dt_desativacao IS NOT NULL THEN
+        UPDATE evento SET dt_desativacao = NEW.dt_desativacao
+        WHERE cd_local = NEW.id_local AND dt_desativacao IS NULL;
+    END IF;
+    RETURN NEW;
 END;
-$$ LANGUAGE 'plpgsql';
+$$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE TRIGGER trg_desativar_local
-	BEFORE UPDATE OF dt_desativacao ON local
-	FOR EACH ROW EXECUTE FUNCTION fnc_desativar_local();
+CREATE TRIGGER trg_desativar_local
+AFTER UPDATE OF dt_desativacao ON local
+FOR EACH ROW
+WHEN (OLD.dt_desativacao IS NULL AND NEW.dt_desativacao IS NOT NULL)
+EXECUTE FUNCTION func_desativar_local();
+
+
 
 /*
 
@@ -339,4 +344,3 @@ CREATE TABLE log_pagamento(
 CREATE OR REPLACE TRIGGER trg_log_pagamento
 	AFTER INSERT OR UPDATE OR DELETE ON pagamento
 	FOR EACH ROW EXECUTE FUNCTION fnc_log_geral();
-

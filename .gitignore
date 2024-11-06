@@ -1,2 +1,4 @@
 .env
 .gitignore
+rpa-postgresql.pem
+ativar_eventos.py
