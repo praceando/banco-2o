@@ -344,4 +344,3 @@ CREATE TABLE log_pagamento(
 CREATE OR REPLACE TRIGGER trg_log_pagamento
 	AFTER INSERT OR UPDATE OR DELETE ON pagamento
 	FOR EACH ROW EXECUTE FUNCTION fnc_log_geral();
-
