@@ -1,3 +1,4 @@
 .env
-.github
 .gitignore
+rpa-postgresql.pem
+ativar_eventos.py

@@ -256,8 +256,8 @@ query_avatar = """SELECT p.id_produto, p.estoque, p.nome, p.ds_produto, p.preco,
 				   
 				   
 # Exemplos de chamada da função buscar
-# buscar(tabela_1="frase_sustentavel",query_1=query_frase_sustentavel,p_hard_delete=True)
+buscar(tabela_1="frase_sustentavel",query_1=query_frase_sustentavel,p_hard_delete=True)
 buscar(tabela_1="tag", query_1=query_tag)
-# buscar(tabela_1="evento_local", tabela_2="local")
-# buscar(tabela_1="produto", query_1=query_produto)
-# buscar(tabela_1="avatar", tabela_2="produto", query_1=query_produto)
+buscar(tabela_1="evento_local", tabela_2="local")
+buscar(tabela_1="produto", query_1=query_produto)
+buscar(tabela_1="avatar", tabela_2="produto", query_1=query_produto)
