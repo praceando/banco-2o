@@ -29,7 +29,7 @@ CREATE OR REPLACE TRIGGER trg_desativar_usuario
 ================================================
 */
 
-CREATE OR REPLACE FUNCTION desativar_eventos()
+CREATE OR REPLACE FUNCTION func_desativar_local()
 RETURNS TRIGGER AS $$
 BEGIN
     IF NEW.dt_desativacao IS NOT NULL THEN
@@ -40,11 +40,13 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER trg_desativar_eventos
+CREATE TRIGGER trg_desativar_local
 AFTER UPDATE OF dt_desativacao ON local
 FOR EACH ROW
 WHEN (OLD.dt_desativacao IS NULL AND NEW.dt_desativacao IS NOT NULL)
-EXECUTE FUNCTION desativar_eventos();
+EXECUTE FUNCTION func_desativar_local();
+
+
 
 /*
 
