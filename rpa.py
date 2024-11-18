@@ -241,10 +241,15 @@ query_tag = """SELECT t.id_tag, t.nome, t.descricao, t.dt_atualizacao
 			   FROM tag t
 			   WHERE EXTRACT(EPOCH FROM (NOW() - t.dt_atualizacao)) / 60 < 30	
 			   ORDER BY 1;"""
+      
+query_local = """SELECT et.id_evento_local, et.nome, et.lat, et.lon, et.dt_func_ini, et.dt_func_fim, et.dt_atualizacao
+			   FROM evento_local et
+			   WHERE EXTRACT(EPOCH FROM (NOW() - et.dt_atualizacao)) / 60 < 30	
+			   ORDER BY 1;"""
 			   
 query_produto = """SELECT p.id_produto, p.estoque, p.nome, p.ds_produto, p.preco, p.categoria, i.url_imagem, p.dt_atualizacao
 				   FROM produto p
-				   JOIN imagem i ON p.id_produto = i.id_produto
+				   JOIN imagens i ON p.id_produto = i.id_produto
 				   WHERE EXTRACT(EPOCH FROM (NOW() - p.dt_atualizacao)) / 60 < 30
 				   ORDER BY 1;"""
 					  
@@ -258,6 +263,6 @@ query_avatar = """SELECT p.id_produto, p.estoque, p.nome, p.ds_produto, p.preco,
 # Exemplos de chamada da função buscar
 buscar(tabela_1="frase_sustentavel",query_1=query_frase_sustentavel,p_hard_delete=True)
 buscar(tabela_1="tag", query_1=query_tag)
-buscar(tabela_1="evento_local", tabela_2="local")
+buscar(tabela_1="evento_local", query_1=query_local,tabela_2="local")
 buscar(tabela_1="produto", query_1=query_produto)
 buscar(tabela_1="avatar", tabela_2="produto", query_1=query_produto)
